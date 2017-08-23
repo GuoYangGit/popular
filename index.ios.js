@@ -9,16 +9,20 @@ import {
     AppRegistry,
     StyleSheet,
     Image,
-    Navigator,
+    Text,
     View
 } from 'react-native';
-import TabNavigator from 'react-native-tab-navigator';
+import {Navigator} from 'react-native-deprecated-custom-components';
+import Boy from './Boy';
+import ListView from './ListView'
 
 export default class Hello extends Component {
     constructor(props) {
         super(props);
+        const ds = new ListView.DataSource({rowHasChanged:(r1,r2)=>r1!==r2})
         this.state = {
-            selectedTab: "home",
+            selectedTab: "tb_popular",
+            dataSource:ds.cloneWithRows(),
         }
     }
 
@@ -67,11 +71,19 @@ export default class Hello extends Component {
                         <View style={styles.page2}></View>
                     </TabNavigator.Item>
                 </TabNavigator>*/}
+                {/*<Navigator
+                    initialRoute={{
+                        component: Boy
+                    }}
+                    renderScene={(route, navigator) => {
+                        let Component = route.component;
+                        return <Component navigator={navigator} {...route.params}/>
+                    }}></Navigator>*/}
 
             </View>
         );
     }
-}
+};
 
 const styles = StyleSheet.create({
     container: {
@@ -88,7 +100,7 @@ const styles = StyleSheet.create({
     },
     image: {
         height: 22,
-        width: 22
+        width: 22,
     }
 });
 
